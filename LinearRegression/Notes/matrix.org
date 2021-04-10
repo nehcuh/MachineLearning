@@ -1,0 +1,649 @@
+#+TITLE: 矩阵求导
+
+* 函数与标量，向量和矩阵
+
+考虑一个函数 $function(input)$, 针对 function 的类型， input 类型，可以将这个函数分为九种不同的种类
+
+** function 为标量
+
+#+begin_quote
+function 是一个实值标量函数，用细体小写字母 $f$ 表示
+#+end_quote
+
+*** input 为标量
+1. 称 function 的变元是标量，用细体小写字母 $x$ 表示
+2. 示例
+   \begin{equation}
+     f(x) = x + 2
+   \end{equation}
+
+*** input 为向量
+1. 称 function 的变元为向量，用粗体小写字母 $\boldsymbol{x}$ 表示
+2. 示例：设 $\boldsymbol{x} = [x_1, x_2, x_3]^T$
+   \begin{equation}
+     f(\boldsymbol{x}) = a_{1}x_{1}^{2} + a_{2}x_{2}^{2} + a_{3}x_{3}^{2} + a_{4}x_{1}x_{2}
+   \end{equation}
+
+*** input 为矩阵
+1. 称 function 的变元为矩阵，用粗体的大写字母 $\boldsymbol{X}$ 表示
+2. 示例：设 $\boldsymbol{X}_{3\times 2} = (x_{ij})_{i=1,j=1}^{3,2}$
+   \begin{equation}
+     f(\boldsymbol{X}) = a_{1}x_{11}^{2} + a_{2}x_{12}^{2} + a_{3}x_{21}^{2} + a_{4}x_{22}^{2} + a_{5}x_{31}^{2} + a_{6}x_{32}^{2}
+   \end{equation}
+
+** function 为向量
+
+#+begin_quote
+function 是一个实向量函数，用粗体小写字母 $f$ 表示
+#+end_quote
+
+*** 标量变元
+
+\begin{equation}
+  \boldsymbol{f}_{3\times 1}(x) = \left[\begin{array}{l}
+                                       f_{1}(x)\\
+                                       f_{2}(x)\\
+                                       f_{3}(x)
+                                     \end{array}\right] = \left[\begin{array}{l}
+                                                                  x+1\\
+                                                                  2x+1\\
+                                                                  3x^{2}+1
+                                                                \end{array}\right]
+\end{equation}
+*** 向量变元
+1. 令 $\boldsymbol{x} = [x_1,x_2,x_3]^T$
+2. 示例
+   \begin{equation}
+     \boldsymbol{F}_{3\times 1}(\boldsymbol{x}) = \left[\begin{array}{l}
+                                          f_{1}(\boldsymbol{x})\\
+                                          f_{2}(\boldsymbol{x})\\
+                                          f_{3}(\boldsymbol{x})
+                                        \end{array}\right] = \left[\begin{array}{l}
+                                                                     x_{1}+x_{2}+x_{3}\\
+                                                                     x_{1}^2+2x_{2}+x_{3}\\
+                                                                     x_{1}x_{2}+x_{2}+2x_{3}
+                                                                   \end{array}\right]
+   \end{equation}
+*** 矩阵变元
+1. 令 $\boldsymbol{X} = (x_{ij})_{i=1,j=1}^{3,2}$
+2. 示例
+   \begin{equation}
+     \begin{aligned}
+       \boldsymbol{F}_{3\times 1}(\boldsymbol{X}) &=
+       \left[\begin{array}{l}
+         f_{1}(\boldsymbol{X})\\
+         f_{2}(\boldsymbol{X})\\
+         f_{3}(\boldsymbol{X})
+         \end{array}\right]\\
+       {} &=
+       \left[\begin{array}{l}
+         x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}\\
+         3x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}\\
+         5x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}
+         \end{array}\right]
+     \end{aligned}
+   \end{equation}
+** function 为矩阵
+
+*** 标量变元
+\begin{equation}
+  \boldsymbol{F}_{3\times 2}(x) = \left[\begin{array}{ll}
+                                       f_{11}(x) & f_{12}(x)\\
+                                       f_{21}(x) & f_{22}(x)\\
+                                       f_{32}(x) & f_{32}(x)
+                                     \end{array}\right] = \left[\begin{array}{ll}
+                                                                  x+1 & 2x+2\\
+                                                                  x^{2}+1 & 2x^{2} + 1\\
+                                                                  x^{3}+1 & 2x^{3} + 1
+                                                                \end{array}\right]
+\end{equation}
+
+*** 向量变元
+1. 令 $\boldsymbol{x} = [x_1,x_2,x_3]^T$
+2. 示例
+\begin{equation}
+  \boldsymbol{F}_{3\times 2}(\boldsymbol{x}) = \left[\begin{array}{ll}
+                                       f_{11}(\boldsymbol{x}) & f_{12}(\boldsymbol{x})\\
+                                       f_{21}(\boldsymbol{x}) & f_{22}(\boldsymbol{x})\\
+                                       f_{32}(\boldsymbol{x}) & f_{32}(\boldsymbol{x})
+                                     \end{array}\right] = \left[\begin{array}{ll}
+                                                                  2x_{1}+x_{2}+x_{3} & 2x_{1}+2x_{2}+x_{3}\\
+                                                                  2x_{1}+2x_{2}+x_{3} & x_{1} + 2x_{2} + x_{3}\\
+                                                                  2x_{1}+x_{2}+2x_{3} & x_{1} + 2x_{2} + 2x_{3}
+                                                                \end{array}\right]
+\end{equation}
+
+*** 矩阵变元
+1. 令 $\boldsymbol{X} = (x_{ij})_{i=1,j=1}^{3,2}$
+2. 示例
+
+\begin{equation}
+  \begin{aligned}
+    \boldsymbol{F}_{3\times 2}(\boldsymbol{X}) &=
+    \left[\begin{array}{ll}
+      f_{11}(\boldsymbol{X}) & f_{12}(\boldsymbol{X})\\
+      f_{21}(\boldsymbol{X}) & f_{22}(\boldsymbol{X})\\
+      f_{32}(\boldsymbol{X}) & f_{32}(\boldsymbol{X})
+      \end{array}\right]\\
+    {} &=
+    \left[\begin{array}{ll}
+      x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32} & 2x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}\\
+      3x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}&
+      4x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}
+      \\
+      5x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}&
+      6x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}
+      \end{array}\right]
+  \end{aligned}
+\end{equation}
+
+
+#+begin_quote
+function 是一个实矩阵函数，用粗体大写字母 $F$ 表示
+#+end_quote
+
+* 矩阵求导本质
+
+#+begin_quote
+矩阵求导本质就是 function 对每个 $f$ 分别对变元中每个元素逐个求偏导，只不过也写成了向量，矩阵形式而已
+#+end_quote
+
+* 矩阵求导结果的布局
+
+** 直观上看
+
+1. 分子布局：分子是列向量形式，分母是行向量形式
+   \begin{equation}
+     \frac{\partial \boldsymbol{f}_{2\times 1}(\boldsymbol{x})}{\partial \boldsymbol{x}_{3\times 1}^{T}} =
+     \left[\begin{array}{lll}
+             \frac{\partial f_{1}}{\partial x_{1}} & \frac{\partial f_{1}}{\partial x_{2}} & \frac{\partial f_{1}}{\partial x_{3}}\\
+             \frac{\partial f_{2}}{\partial x_{1}} & \frac{\partial f_{2}}{\partial x_{2}} & \frac{\partial f_{2}}{\partial x_{3}}
+             \end{array}\right]
+   \end{equation}
+2. 分母布局：分母是列向量形式，分子是行向量形式
+   \begin{equation}
+     \frac{\partial \boldsymbol{f}_{2\times 1}^{T}(\boldsymbol{x})}{\partial \boldsymbol{x}_{3\times 1}} =
+     \left[\begin{array}{lll}
+             \frac{\partial f_{1}}{\partial x_{1}} & \frac{\partial f_{2}}{\partial x_{1}}\\
+             \frac{\partial f_{1}}{\partial x_{2}} & \frac{\partial f_{2}}{\partial x_{2}} \\
+             \frac{\partial f_{1}}{\partial x_{3}} & \frac{\partial f_{2}}{\partial x_{3}}
+             \end{array}\right]
+   \end{equation}
+
+** 向量变元的实值标量函数 $f(\boldsymbol{x}), \boldsymbol{x}=[x_1,\ldots,x_n]^T$
+*** 行向量偏导形式 (又称行偏导向量形式)
+#+NAME: eq:row_partial
+\begin{equation}
+  D_{x}f(\boldsymbol{x}) = \frac{\partial f(\boldsymbol{x})}{\partial \boldsymbol{x}^{T}}
+  = \left[\frac{\partial f}{\partial x_{1}}, \frac{\partial f}{\partial x_{2}},\ldots, \frac{\partial f}{\partial x_{n}}\right]
+\end{equation}
+
+*** 梯度向量形式 (又称列向量偏导形式)
+#+NAME: eq:col_partial
+\begin{equation}
+  \nabla_{x}f(\boldsymbol{x}) = \frac{\partial f(\boldsymbol{x})}{\partial \boldsymbol{x}}
+  = \left[\frac{\partial f}{\partial x_{1}}, \frac{\partial f}{\partial x_{2}},\ldots, \frac{\partial f}{\partial x_{n}}\right]^{T}
+\end{equation}
+
+** 矩阵变元的实值标量函数 $f(\boldsymbol{X}), \boldsymbol{X}_{m\times n} = (x_{ij})_{i=1,j=1}^{m,n}$
+*** $vec(\boldsymbol{X})$
+1. 矩阵 $\boldsymbol{X}$ 按列堆栈来向量化
+2. 示例
+\begin{equation}
+  vec(\boldsymbol{X}) = [x_{11},x_{21},\ldots,x_{m1},x_{12},x_{22},\ldots,x_{m2},\ldots,x_{1n},x_{2n},\ldots,x_{mn}]^{T}
+\end{equation}
+
+*** 行向量偏导形式 (又称行偏导向量形式)
+
+1. 先把矩阵变元 $\boldsymbol{X}$ 按 $vec(\boldsymbol{X})$ 向量化，再对该向量变元应用等式 ([[eq:row_partial]])
+2. 示例
+   \begin{equation}
+     \begin{aligned}
+       D_{vec({\boldsymbol{X}})} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial vec^{T}(\boldsymbol{X})}\\
+       {}&=\left[
+           \frac{\partial f}{\partial x_{11}}, \frac{\partial f}{\partial x_{21}}, \ldots, \frac{\partial f}{\partial x_{m1}},
+           \frac{\partial f}{\partial x_{12}}, \frac{\partial f}{\partial x_{22}}, \ldots, \frac{\partial f}{\partial x_{m2}},
+           \frac{\partial f}{\partial x_{1n}}, \frac{\partial f}{\partial x_{2n}}, \ldots, \frac{\partial f}{\partial x_{mn}}
+       \right]
+     \end{aligned}
+   \end{equation}
+*** Jacobian 矩阵形式
+1. 先把矩阵变元 $\boldsymbol{X}$ 进行转置，再对转置后的每个元素逐个求偏导，结果布局和转置布局一样
+2. 示例
+   \begin{equation}
+     \begin{aligned}
+       D_{\boldsymbol{X}} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^T_{m\times n}}\\
+       {}&=\left[
+         \begin{array}{llll}
+           \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{21}} & \ldots & \frac{\partial f}{\partial x_{m1}}\\
+           \frac{\partial f}{\partial x_{12}} & \frac{\partial f}{\partial x_{22}} & \ldots & \frac{\partial f}{\partial x_{m2}}\\
+           \vdots & \vdots & \vdots & \vdots\\
+           \frac{\partial f}{\partial x_{1n}} & \frac{\partial f}{\partial x_{2n}} & \ldots & \frac{\partial f}{\partial x_{mn}}\\
+           \end{array}
+       \right]_{n\times m}
+     \end{aligned}
+   \end{equation}
+*** 梯度向量形式 (又称列向量偏导形式)
+1. 先把原矩阵变元 $\boldsymbol{X}$ 按 vec 向量化，转变为向量变元，再对该变元使用等式 ([[eq:col_partial]])
+2. 示例：
+   \begin{equation}
+     \begin{aligned}
+       \nabla_{vec({\boldsymbol{X}})} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial vec(\boldsymbol{X})}\\
+       {}&=\left[
+           \frac{\partial f}{\partial x_{11}}, \frac{\partial f}{\partial x_{21}}, \ldots, \frac{\partial f}{\partial x_{m1}},
+           \frac{\partial f}{\partial x_{12}}, \frac{\partial f}{\partial x_{22}}, \ldots, \frac{\partial f}{\partial x_{m2}},
+           \frac{\partial f}{\partial x_{1n}}, \frac{\partial f}{\partial x_{2n}}, \ldots, \frac{\partial f}{\partial x_{mn}}
+       \right]^T
+     \end{aligned}
+   \end{equation}
+*** 梯度矩阵形式
+1. 直接对原矩阵变元 $\boldsymbol{X}$ 每个位置元素逐个求偏导，结果布局和原矩阵布局一致
+2. 示例
+   \begin{equation}
+     \begin{aligned}
+       \nabla_{\boldsymbol{X}} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^T_{m\times n}}\\
+       {}&=\left[
+         \begin{array}{llll}
+           \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{12}} & \ldots & \frac{\partial f}{\partial x_{1n}}\\
+           \frac{\partial f}{\partial x_{21}} & \frac{\partial f}{\partial x_{22}} & \ldots & \frac{\partial f}{\partial x_{2n}}\\
+           \vdots & \vdots & \vdots & \vdots\\
+           \frac{\partial f}{\partial x_{m1}} & \frac{\partial f}{\partial x_{m2}} & \ldots & \frac{\partial f}{\partial x_{mn}}\\
+           \end{array}
+       \right]_{{m\times n}}
+     \end{aligned}
+   \end{equation}
+
+* 矩阵变元的实矩阵函数 $\boldsymbol{F}(\boldsymbol{X}), \boldsymbol{X}_{m\times n} = (x_{ij})^{m,n}_{i=1,j=1}, \boldsymbol{F}_{p\times q} = (f_{ij})_{i=1,j=1}^{p,q}$
+** Jacobian 矩阵形式
+
+1. 先把矩阵变元 $\boldsymbol{X}$ 按 vec 向量化，转换为向量变元
+   \begin{equation}
+     vec(\boldsymbol{X}) = [x_{11}, x_{21}, \ldots, x_{m1},x_{12},x_{22},\ldots,x_{m2},\ldots,x_{1n},x_{2n},\ldots,x_{mn}]^{T}
+   \end{equation}
+2. 将实矩阵函数 $\boldsymbol{F}$ 按 vec 向量化，转换为实向量函数
+   \begin{equation}
+     vec(F(\boldsymbol{X})) = [f_{11}(\boldsymbol{X}), f_{21}(\boldsymbol{X}), \ldots, f_{m1}(\boldsymbol{X}),f_{12}(\boldsymbol{X}),f_{22}(\boldsymbol{X}),\ldots,f_{m2}(\boldsymbol{X}),\ldots,f_{1n}(\boldsymbol{X}),f_{2n}(\boldsymbol{X}),\ldots,f_{mn}(\boldsymbol{X})]^{T}
+   \end{equation}
+3. 写出布局为 $pq\times mn$ 的矩阵
+   \begin{equation}
+     \begin{aligned}
+       D_{\boldsymbol{X}} \boldsymbol{F}(\boldsymbol{X}) &= \frac{\partial vec_{pg\times 1}(\boldsymbol{F}(\boldsymbol{X}))}{\partial vec^{T}_{mn\times 1}\boldsymbol{X}} \\
+       {} &=
+       \left[
+         \begin{array}{lllllllllllll}
+           \frac{\partial f_{11}}{\partial x_{11}}& \frac{\partial f_{11}}{\partial x_{21}} & \ldots & \frac{\partial f_{11}}{\partial x_{m1}} & \frac{\partial f_{11}}{\partial x_{12}} & \frac{\partial f_{11}}{\partial x_{22}} &\ldots & \frac{\partial f_{11}}{\partial x_{m2}} & \ldots & \frac{\partial f_{11}}{\partial x_{1n}} & \frac{\partial f_{11}}{\partial x_{2n}} & \ldots & \frac{\partial f_{11}}{\partial x_{mn}} \\
+          \frac{\partial f_{21}}{\partial x_{11}}& \frac{\partial f_{21}}{\partial x_{21}} & \ldots & \frac{\partial f_{21}}{\partial x_{m1}} & \frac{\partial f_{21}}{\partial x_{12}} & \frac{\partial f_{21}}{\partial x_{22}} &\ldots & \frac{\partial f_{21}}{\partial x_{m2}} & \ldots & \frac{\partial f_{21}}{\partial x_{1n}} & \frac{\partial f_{21}}{\partial x_{2n}} & \ldots & \frac{\partial f_{21}}{\partial x_{mn}} \\
+           \vdots & \vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots&\vdots\\
+          \frac{\partial f_{p1}}{\partial x_{11}}& \frac{\partial f_{p1}}{\partial x_{21}} & \ldots & \frac{\partial f_{p1}}{\partial x_{m1}} & \frac{\partial f_{p1}}{\partial x_{12}} & \frac{\partial f_{p1}}{\partial x_{22}} &\ldots & \frac{\partial f_{p1}}{\partial x_{m2}} & \ldots & \frac{\partial f_{p1}}{\partial x_{1n}} & \frac{\partial f_{p1}}{\partial x_{2n}} & \ldots & \frac{\partial f_{p1}}{\partial x_{mn}} \\
+           \vdots & \vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots&\vdots\\
+          \frac{\partial f_{p2}}{\partial x_{11}}& \frac{\partial f_{p2}}{\partial x_{21}} & \ldots & \frac{\partial f_{p2}}{\partial x_{m1}} & \frac{\partial f_{p2}}{\partial x_{12}} & \frac{\partial f_{p2}}{\partial x_{22}} &\ldots & \frac{\partial f_{p2}}{\partial x_{m2}} & \ldots & \frac{\partial f_{p2}}{\partial x_{1n}} & \frac{\partial f_{p2}}{\partial x_{2n}} & \ldots & \frac{\partial f_{p2}}{\partial x_{mn}} \\
+           \vdots & \vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots&\vdots\\
+           \frac{\partial f_{1q}}{\partial x_{11}}& \frac{\partial f_{1q}}{\partial x_{21}} & \ldots & \frac{\partial f_{1q}}{\partial x_{m1}} & \frac{\partial f_{1q}}{\partial x_{12}} & \frac{\partial f_{1q}}{\partial x_{22}} &\ldots & \frac{\partial f_{1q}}{\partial x_{m2}} & \ldots & \frac{\partial f_{1q}}{\partial x_{1n}} & \frac{\partial f_{1q}}{\partial x_{2n}} & \ldots & \frac{\partial f_{1q}}{\partial x_{mn}} \\
+           \frac{\partial f_{2q}}{\partial x_{11}}& \frac{\partial f_{2q}}{\partial x_{21}} & \ldots & \frac{\partial f_{2q}}{\partial x_{m1}} & \frac{\partial f_{2q}}{\partial x_{12}} & \frac{\partial f_{2q}}{\partial x_{22}} &\ldots & \frac{\partial f_{2q}}{\partial x_{m2}} & \ldots & \frac{\partial f_{2q}}{\partial x_{1n}} & \frac{\partial f_{2q}}{\partial x_{2n}} & \ldots & \frac{\partial f_{2q}}{\partial x_{mn}} \\
+           \vdots & \vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots&\vdots\\
+           \frac{\partial f_{pq}}{\partial x_{11}}& \frac{\partial f_{pq}}{\partial x_{21}} & \ldots & \frac{\partial f_{pq}}{\partial x_{m1}} & \frac{\partial f_{pq}}{\partial x_{12}} & \frac{\partial f_{pq}}{\partial x_{22}} &\ldots & \frac{\partial f_{pq}}{\partial x_{m2}} & \ldots & \frac{\partial f_{pq}}{\partial x_{1n}} & \frac{\partial f_{pq}}{\partial x_{2n}} & \ldots & \frac{\partial f_{pq}}{\partial x_{mn}}
+         \end{array}
+       \right]_{pq\times mn}
+     \end{aligned}
+   \end{equation}
+
+** 梯度矩阵形式
+\begin{equation}
+  \begin{aligned}
+    \nabla_{\boldsymbol{X}} \boldsymbol{F}(\boldsymbol{X}) &= \frac{\partial vec^T_{pg\times 1}(\boldsymbol{F}(\boldsymbol{X}))}{\partial vec_{mn\times 1}\boldsymbol{X}} \\
+    {} &=
+    \left[
+      \begin{array}{llllllllllll}
+        \frac{\partial f_{11}}{\partial x_{11}} & \frac{\partial f_{21}}{\partial x_{11}} & \ldots & \frac{\partial f_{p1}}{\partial x_{11}} & \frac{\partial f_{12}}{\partial x_{11}} & \frac{\partial f_{22}}{\partial x_{11}} & \ldots & \frac{\partial f_{p2}}{\partial x_{11}} & \ldots & \frac{\partial f_{1q}}{\partial x_{11}} & \ldots & \frac{\partial f_{pq}}{\partial x_{11}}\\
+        \frac{\partial f_{11}}{\partial x_{21}} & \frac{\partial f_{21}}{\partial x_{21}} & \ldots & \frac{\partial f_{p1}}{\partial x_{21}} & \frac{\partial f_{12}}{\partial x_{21}} & \frac{\partial f_{22}}{\partial x_{21}} & \ldots & \frac{\partial f_{p2}}{\partial x_{21}} & \ldots & \frac{\partial f_{1q}}{\partial x_{21}} & \ldots & \frac{\partial f_{pq}}{\partial x_{21}}\\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots\\
+        \frac{\partial f_{11}}{\partial x_{m1}} & \frac{\partial f_{21}}{\partial x_{m1}} & \ldots & \frac{\partial f_{p1}}{\partial x_{m1}} & \frac{\partial f_{12}}{\partial x_{m1}} & \frac{\partial f_{22}}{\partial x_{m1}} & \ldots & \frac{\partial f_{p2}}{\partial x_{m1}} & \ldots & \frac{\partial f_{1q}}{\partial x_{m1}} & \ldots & \frac{\partial f_{pq}}{\partial x_{m1}}\\
+        \frac{\partial f_{11}}{\partial x_{12}} & \frac{\partial f_{21}}{\partial x_{12}} & \ldots & \frac{\partial f_{p1}}{\partial x_{12}} & \frac{\partial f_{12}}{\partial x_{12}} & \frac{\partial f_{22}}{\partial x_{12}} & \ldots & \frac{\partial f_{p2}}{\partial x_{12}} & \ldots & \frac{\partial f_{1q}}{\partial x_{12}} & \ldots & \frac{\partial f_{pq}}{\partial x_{12}}\\
+        \frac{\partial f_{11}}{\partial x_{22}} & \frac{\partial f_{21}}{\partial x_{22}} & \ldots & \frac{\partial f_{p1}}{\partial x_{22}} & \frac{\partial f_{12}}{\partial x_{22}} & \frac{\partial f_{22}}{\partial x_{22}} & \ldots & \frac{\partial f_{p2}}{\partial x_{22}} & \ldots & \frac{\partial f_{1q}}{\partial x_{22}} & \ldots & \frac{\partial f_{pq}}{\partial x_{22}}\\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots\\
+        \frac{\partial f_{11}}{\partial x_{m2}} & \frac{\partial f_{21}}{\partial x_{m2}} & \ldots & \frac{\partial f_{p1}}{\partial x_{m2}} & \frac{\partial f_{12}}{\partial x_{m2}} & \frac{\partial f_{22}}{\partial x_{m2}} & \ldots & \frac{\partial f_{p2}}{\partial x_{m2}} & \ldots & \frac{\partial f_{1q}}{\partial x_{m2}} & \ldots & \frac{\partial f_{pq}}{\partial x_{m2}} \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots\\
+        \frac{\partial f_{11}}{\partial x_{1n}} & \frac{\partial f_{21}}{\partial x_{1n}} & \ldots & \frac{\partial f_{p1}}{\partial x_{1n}} & \frac{\partial f_{12}}{\partial x_{1n}} & \frac{\partial f_{22}}{\partial x_{1n}} & \ldots & \frac{\partial f_{p2}}{\partial x_{1n}} & \ldots & \frac{\partial f_{1q}}{\partial x_{1n}} & \ldots & \frac{\partial f_{pq}}{\partial x_{1n}} \\
+        \frac{\partial f_{11}}{\partial x_{2n}} & \frac{\partial f_{21}}{\partial x_{2n}} & \ldots & \frac{\partial f_{p1}}{\partial x_{2n}} & \frac{\partial f_{12}}{\partial x_{2n}} & \frac{\partial f_{22}}{\partial x_{2n}} & \ldots & \frac{\partial f_{p2}}{\partial x_{2n}} & \ldots & \frac{\partial f_{1q}}{\partial x_{2n}} & \ldots & \frac{\partial f_{pq}}{\partial x_{2n}} \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots\\
+        \frac{\partial f_{11}}{\partial x_{mn}} & \frac{\partial f_{21}}{\partial x_{mn}} & \ldots & \frac{\partial f_{p1}}{\partial x_{mn}} & \frac{\partial f_{12}}{\partial x_{mn}} & \frac{\partial f_{22}}{\partial x_{mn}} & \ldots & \frac{\partial f_{p2}}{\partial x_{mn}} & \ldots & \frac{\partial f_{1q}}{\partial x_{mn}} & \ldots & \frac{\partial f_{pq}}{\partial x_{mn}} \\
+      \end{array}
+    \right]_{mn\times pq}
+  \end{aligned}
+\end{equation}
+
+* 向量变元的实值标量函数
+** 函数形式
+1. 函数形式 $f(\boldsymbol{x}), \boldsymbol{x} = [x_1,x_2,\ldots,x_n]^T$
+2. 使用梯度形式，有
+   \begin{equation}
+     \begin{aligned}
+      \nabla_{\boldsymbol{x}}f(\boldsymbol{x}) &= \frac{\partial f(\boldsymbol{x})}{\partial \boldsymbol{x}}\\
+      {} &= \left[\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\ldots,\frac{\partial f}{\partial x_n}\right]^T
+     \end{aligned}
+   \end{equation}
+** 四个法则
+*** 常数求导
+与一元函数求导相同，结果为零向量
+\begin{equation}
+  \frac{\partial c}{\partial \boldsymbol{x}} = \boldsymbol{0}_{n\times 1}
+\end{equation}
+其中， $c$ 为常数
+*** 线性法则
+与一元函数求导法则相同：相加再求导等于求导再相加，常数提外面
+\begin{equation}
+  \frac{\partial[c_{1}f(\boldsymbol{x}) + c_{2}g(\boldsymbol{x})]}{\partial \boldsymbol{x}} = c_{1}\frac{\partial f(\boldsymbol{x})}{\partial \boldsymbol{x}} + c_{2}\frac{\partial g(\boldsymbol{x})}{\partial \boldsymbol{x}}
+\end{equation}
+其中， $c_1, c_2$ 为常数
+*** 乘积法则
+与一元函数求导乘积法则相同，前导后不导加前不导后导
+\begin{equation}
+  \frac{\partial[f(\boldsymbol{x})g(\boldsymbol{x})]}{\partial \boldsymbol{x}} = \frac{\partial f(\boldsymbol{x})}{\partial \boldsymbol{x}}g(\boldsymbol{x}) + f(\boldsymbol{x})\frac{\partial g(\boldsymbol{x})}{\partial \boldsymbol{x}}
+\end{equation}
+*** 商法则
+与一元函数求导商法则相同，上导下不导减上不导下导除以下的平方
+\begin{equation}
+  \frac{\partial \left[\frac{f(\boldsymbol{x})}{g(\boldsymbol{x})}\right]}{\partial \boldsymbol{x}}
+  = \frac{1}{g^{2}(\boldsymbol{x})}\left[\frac{\partial f(\boldsymbol{x})}{\partial\boldsymbol{x}}g(\boldsymbol{x})
+  - f(\boldsymbol{x})\frac{\partial g(\boldsymbol{x})}{\partial\boldsymbol{x}}\right]
+\end{equation}
+
+** 几个公式
+*** 公式 1
+\begin{equation}
+   \frac{\partial (\boldsymbol{x}^T\boldsymbol{a})}{\partial \boldsymbol{x}} = \frac{\partial (\boldsymbol{a}^T\boldsymbol{x})}{\partial \boldsymbol{x}} = \boldsymbol{a}
+\end{equation}
+其中， $\boldsymbol{a}$ 为常数向量， $\boldsymbol{a} = (a_1,a_2,\ldots,a_n)^T$
+*** 公式 2
+\begin{equation}
+   \frac{\partial (\boldsymbol{x}^T\boldsymbol{x})}{\partial \boldsymbol{x}} = 2\boldsymbol{x}
+\end{equation}
+*** 公式 3
+\begin{equation}
+   \frac{\partial (\boldsymbol{x}^T\boldsymbol{A}\boldsymbol{a})}{\partial \boldsymbol{x}} =  \boldsymbol{A}\boldsymbol{x} + \boldsymbol{A}^T\boldsymbol{x}
+\end{equation}
+其中， $\boldsymbol{A}_{n\times n}$ 为常数矩阵
+*** 公式 4
+\begin{equation}
+  \frac{\partial(\boldsymbol{a}^{T}\boldsymbol{x}\boldsymbol{x}^{T}\boldsymbol{b})}{\partial \boldsymbol{x}}
+  = \boldsymbol{a}\boldsymbol{b}^{T}\boldsymbol{x} + \boldsymbol{b}\boldsymbol{a}^{T}\boldsymbol{x}
+\end{equation}
+其中, $\boldsymbol{a} = [a_1, \ldots, a_n]^T,\boldsymbol{b}=[b_1,\ldots,b_n]^T$ 为常数常量
+* 矩阵变元的实值标量函数
+** 函数形式
+1. 函数形式
+   \begin{equation}
+     f(\boldsymbol{X}), \boldsymbol{X}_{m\times n} = (x_{ij})_{i=1,j=1}^{m,n}
+   \end{equation}
+2. 使用梯度矩阵形式
+   \begin{equation}
+     \begin{aligned}
+       \nabla_{\boldsymbol{X}} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}_{m\times n}} \\
+       {} &= \left[
+         \begin{array}{llll}
+           \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{12}} & \ldots & \frac{\partial f}{\partial x_{1n}}\\
+           \frac{\partial f}{\partial x_{21}} & \frac{\partial f}{\partial x_{22}} & \ldots & \frac{\partial f}{\partial x_{2n}}\\
+           \vdots & \vdots & \vdots & \vdots\\
+           \frac{\partial f}{\partial x_{m1}} & \frac{\partial f}{\partial x_{m2}} & \ldots & \frac{\partial f}{\partial x_{mn}}
+         \end{array}
+       \right]_{m\times n}
+     \end{aligned}
+   \end{equation}
+** 四个法则
+*** 常数求导
+\begin{equation}
+  \frac{\partial c}{\partial \boldsymbol{X}} = \boldsymbol{0}_{m\times n}
+\end{equation}
+*** 线性法则
+\begin{equation}
+  \frac{\partial[c_{1}f(\boldsymbol{X}) + c_{2}g(\boldsymbol{X})]}{\partial \boldsymbol{X}} = c_{1}\frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}} + c_{2}\frac{\partial g(\boldsymbol{X})}{\partial \boldsymbol{X}}
+\end{equation}
+*** 乘积法则
+\begin{equation}
+  \frac{\partial[f(\boldsymbol{X})g(\boldsymbol{X})]}{\partial \boldsymbol{X}} = \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}}g(\boldsymbol{X}) + f(\boldsymbol{X})\frac{\partial g(\boldsymbol{X})}{\partial \boldsymbol{x}}
+\end{equation}
+*** 商法则
+\begin{equation}
+  \frac{\partial \left[\frac{f(\boldsymbol{X})}{g(\boldsymbol{X})}\right]}{\partial \boldsymbol{X}}
+  = \frac{1}{g^{2}(\boldsymbol{X})}\left[\frac{\partial f(\boldsymbol{X})}{\partial\boldsymbol{X}}g(\boldsymbol{X})
+  - f(\boldsymbol{X})\frac{\partial g(\boldsymbol{X})}{\partial\boldsymbol{X}}\right]
+\end{equation}
+** 几个公式
+*** 公式 1
+\begin{equation}
+   \frac{\partial (\boldsymbol{a}^T\boldsymbol{X}\boldsymbol{b})}{\partial \boldsymbol{X}} = \boldsymbol{a}\boldsymbol{b}^T}
+\end{equation}
+其中， $\boldsymbol{a}_{m\times 1}, \boldsymbol{b}_{n\times 1}$ 为常数向量， $\boldsymbol{a} = (a_1,a_2,\ldots,a_m)^T, \boldsymbol{b} = (b_1,b_2,\ldots,b_n)^T$
+*** 公式 2
+\begin{equation}
+   \frac{\partial (\boldsymbol{a}^T\boldsymbol{X}^T\boldsymbol{b})}{\partial \boldsymbol{X}} = \boldsymbol{b}\boldsymbol{a}^T}
+\end{equation}
+其中， $\boldsymbol{a}_{n\times 1}, \boldsymbol{b}_{m\times 1}$ 为常数向量， $\boldsymbol{a} = (a_1,a_2,\ldots,a_n)^T, \boldsymbol{b} = (b_1,b_2,\ldots,b_n)^T$
+*** 公式 3
+\begin{equation}
+   \frac{\partial (\boldsymbol{a}^T\boldsymbol{X}\boldsymbol{X}^T\boldsymbol{b})}{\partial \boldsymbol{X}} =  \boldsymbol{a}\boldsymbol{b}^T}\boldsymbol{X} + \boldsymbol{b}\boldsymbol{a}^T}\boldsymbol{X}
+\end{equation}
+其中， $\boldsymbol{a}_{m\times 1}, \boldsymbol{b}_{m\times 1}$ 为常数向量， $\boldsymbol{a} = (a_1,a_2,\ldots,a_m)^T, \boldsymbol{b} = (b_1,b_2,\ldots,b_m)^T$
+*** 公式 4
+\begin{equation}
+   \frac{\partial (\boldsymbol{a}^T\boldsymbol{X}^T\boldsymbol{X}\boldsymbol{b})}{\partial \boldsymbol{X}} =  \boldsymbol{X}\boldsymbol{b}\boldsymbol{a}^T} + \boldsymbol{X}\boldsymbol{a}\boldsymbol{b}^T}
+\end{equation}
+其中， $\boldsymbol{a}_{n\times 1}, \boldsymbol{b}_{n\times 1}$ 为常数向量， $\boldsymbol{a} = (a_1,a_2,\ldots,a_n)^T, \boldsymbol{b} = (b_1,b_2,\ldots,b_n)^T$
+* 矩阵的迹
+** 定义
+$n\times n$ 的方阵 $\boldsymbol{A}_{n\times n}$ 的主对角线元素之和称为矩阵 $\boldsymbol{A}$ 的迹 (trace), 记为  $tr(\boldsymbol{A})$
+** 性质
+1. 标量的迹：一个标量 $x$ 可以看作 $1\times 1$ 的矩阵，它的迹就是它自己
+2. 线性法则: 相加再求迹等于求迹再相加, 标量提外面
+   \begin{equation}
+    tr(c_{1}\boldsymbol{A} + c_{2}\boldsymbol{B}) = c_{1}tr(\boldsymbol{A}) + c_{2}tr(\boldsymbol{B})
+   \end{equation}
+3. 转置：转置矩阵的迹等于原矩阵的迹
+4. 乘积的迹的本质
+   对于两个阶数都是 $m\times n$ 的矩阵 $\boldsymbol{A}_{m\times n}, \boldsymbol{B}_{m\times n}$, 其中一个矩阵诚意另一个
+   矩阵的转置的迹，本质上是 $\boldsymbol{A}_{m\times n}, \boldsymbol{B}_{m\times n}$ 两个矩阵对应位置的元素相乘并相加，
+   可以理解为向量点积在矩阵上的推广
+   #+NAME: eq:trace_prod
+   \begin{equation}
+     tr(\boldsymbol{A}\boldsymbol{B}^{T}) =
+     \begin{array}{l}
+     a_{11}b_{11} + a_{12}b_{12} + \ldots + a_{1n}b_{1n}\\
+   + a_{21}b_{21} + a_{22}b_{22} + \ldots + a_{2n}b_{2n}\\
+   +\ldots\\
+   + a_{m1}b_{m1} + a_{m2}b_{m2} + \ldots + a_{mn}b_{mn}\\
+     \end{array}
+   \end{equation}
+5. 交换律：矩阵乘积位置互换，迹不变
+6. 更多矩阵的交换律：
+   \begin{equation}
+     tr(\boldsymbol{A}\boldsymbol{B}\boldsymbol{C}) = tr(\boldsymbol{C}\boldsymbol{A}\boldsymbol{B}) = tr(\boldsymbol{B}\boldsymbol{C}\boldsymbol{A})
+   \end{equation}
+7. 熟练使用
+   \begin{equation}
+     tr(\boldsymbol{A}\boldsymbol{B}^{T}) = tr(\boldsymbol{B}\boldsymbol{A}^{T}) =tr(\boldsymbol{A}^{T}\boldsymbol{B}) = tr(\boldsymbol{B}\boldsymbol{A}^{T})
+   \end{equation}
+
+* 微分与全微分
+* 矩阵的微分
+** 向量变元的实值标量函数
+1. 函数形式
+   \begin{equation}
+     f(\boldsymbol{x}), \boldsymbol{x} = [x_{1},x_{2},\ldots,x_{n}]^{T}
+   \end{equation}
+2. 全微分
+   \begin{equation}
+     \begin{aligned}
+       df(\boldsymbol{x}) &= \frac{\partial f}{\partial x_{1}}dx_{1} + \frac{\partial f}{\partial x_{2}}dx_{2}+\ldots++\frac{\partial f}{\partial x_{n}}dx_{n}\\
+       {} &= \left(\frac{\partial f}{\partial x_{1}},\frac{\partial f}{\partial x_{2}},\ldots,\frac{\partial f}{\partial x_{n}}\right)
+       \left[\begin{array}{l}
+         dx_{1}\\
+         dx_{2}\\
+         \vdots\\
+         dx_{n}\\
+       \end{array}\right]
+     \end{aligned}
+   \end{equation}
+3. 因为结果是标量，也可以写为迹的形式
+   \begin{equation}
+     \begin{aligned}
+       df(\boldsymbol{x}) &= \left(\frac{\partial f}{\partial x_{1}},\frac{\partial f}{\partial x_{2}},\ldots,\frac{\partial f}{\partial x_{n}}\right)
+       \left[\begin{array}{l}
+         dx_{1}\\
+         dx_{2}\\
+         \vdots\\
+         dx_{n}\\
+       \end{array}\right]\\
+       {} &= tr(\left(\frac{\partial f}{\partial x_{1}},\frac{\partial f}{\partial x_{2}},\ldots,\frac{\partial f}{\partial x_{n}}\right)
+       \left[\begin{array}{l}
+         dx_{1}\\
+         dx_{2}\\
+         \vdots\\
+         dx_{n}\\
+       \end{array}\right])
+     \end{aligned}
+   \end{equation}
+** 矩阵变元的实值标量函数
+1. 函数形式
+   \begin{equation}
+     f(\boldsymbol{X}), \boldsymbol{X}_{m\times n} = (x_{ij})_{i=1,j=1}^{m,n}
+   \end{equation}
+2. 全微分
+   \begin{equation}
+     \begin{aligned}
+       df(\boldsymbol{X}) &= \frac{\partial f}{\partial x_{11}}dx_{11} + \frac{\partial f}{\partial x_{12}}dx_{12}+\ldots++\frac{\partial f}{\partial x_{1n}}dx_{1n}\\
+       {} &+ \frac{\partial f}{\partial x_{21}}dx_{21} + \frac{\partial f}{\partial x_{22}}dx_{22}+\ldots++\frac{\partial f}{\partial x_{2n}}dx_{2n}\\
+       {} &+ \ldots\\
+       {} &+ \frac{\partial f}{\partial x_{m1}}dx_{m1} + \frac{\partial f}{\partial x_{m2}}dx_{m2}+\ldots++\frac{\partial f}{\partial x_{mn}}dx_{mn}
+     \end{aligned}
+   \end{equation}
+3. 上式其实就是矩阵 $\left(\frac{\partial f}{\partial x_{ij}\right)_{i=1,j=1}^{m,n}$  与矩阵 $(dx_{ij})_{i=1,j=1}^{m,n}$
+   对应位置的元素相乘并相加，从等式 ([[eq:trace_prod]]) 可以看出，上式可以写为两个矩阵相乘的迹
+   #+NAME: eq:trace_two_matrix
+   \begin{equation}
+     \begin{aligned}
+       df(\boldsymbol{X}) &= \frac{\partial f}{\partial x_{11}}dx_{11} + \frac{\partial f}{\partial x_{12}}dx_{12}+\ldots++\frac{\partial f}{\partial x_{1n}}dx_{1n}\\
+       {} &+ \frac{\partial f}{\partial x_{21}}dx_{21} + \frac{\partial f}{\partial x_{22}}dx_{22}+\ldots++\frac{\partial f}{\partial x_{2n}}dx_{2n}\\
+       {} &+ \ldots\\
+       {} &+ \frac{\partial f}{\partial x_{m1}}dx_{m1} + \frac{\partial f}{\partial x_{m2}}dx_{m2}+\ldots++\frac{\partial f}{\partial x_{mn}}dx_{mn}\\
+       {} &= tr(\left[
+        \begin{array}{llll}
+          \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{21}} & \ldots & \frac{\partial f}{\partial x_{m1}} \\
+          \frac{\partial f}{\partial x_{12}} & \frac{\partial f}{\partial x_{22}} & \ldots & \frac{\partial f}{\partial x_{m2}} \\
+          \vdots & \vdots & \vdots & \vdots\\
+          \frac{\partial f}{\partial x_{1n}} & \frac{\partial f}{\partial x_{2n}} & \ldots & \frac{\partial f}{\partial x_{mn}} \\
+        \end{array}
+       \right]_{n\times m}
+       \left[\begin{array}{llll}
+          dx_{11} & dx_{12} & \ldots & dx_{1n}} \\
+          dx_{21} & dx_{22} & \ldots & dx_{2n}} \\
+          \vdots & \vdots & \vdots & \vdots\\
+          dx_{m1} & dx_{m2} & \ldots & dx_{mn}} \\
+        \end{array}
+       \right]_{m\times n})
+     \end{aligned}
+   \end{equation}
+** 矩阵变元的实矩阵函数
+1. 函数形式
+   \begin{equation}
+     \boldsymbol{F}(\boldsymbol{X}), \boldsymbol{F}_{p\times q} = (f_{ij})^{p,q}_{i=1,j=1},\boldsymbol{X}_{m\times n} = (x_{ij})_{i=1,j=1}^{m,n}
+   \end{equation}
+2. 全微分: 设 $f_{ij}(\boldsymbol{X})$ 可微
+   \begin{equation}
+     d\boldsymbol{F}_{p\times q}(\boldsymbol{X}) = \left[
+       \begin{array}{llll}
+         df_{11}(\boldsymbol{X}) & f_{12}(\boldsymbol{X}) & \ldots & f_{1q}(\boldsymbol{X})\\
+         df_{21}(\boldsymbol{X}) & f_{22}(\boldsymbol{X}) & \ldots & f_{2q}(\boldsymbol{X})\\
+         \vdots & \vdots & \vdots & \vdots\\
+         df_{p1}(\boldsymbol{X}) & f_{p2}(\boldsymbol{X}) & \ldots & f_{pq}(\boldsymbol{X})\\
+       \end{array}
+     \right]_{p\times q}
+   \end{equation}
+3. 四个法则
+   - 常数矩阵的矩阵微分
+     \begin{equation}
+       d\boldsymbol{A}_{m\times n} = 0_{m\times n}
+     \end{equation}
+   - 线性法则
+     \begin{equation}
+       d(c_{1}\boldsymbol{F}(\boldsymbol{X}) + c_{2}\boldsymbol{G}({\boldsymbol{X}})) = c_{1}d\boldsymbol{F}(\boldsymbol{X}) + c_{2}d\boldsymbol{G}(\boldsymbol{X})
+     \end{equation}
+   - 乘积法则
+     \begin{equation}
+       d(\boldsymbol{F}(\boldsymbol{X})\boldsymbol{G}(\boldsymbol{X})) = d(\boldsymbol{F}(\boldsymbol{X}))\boldsymbol{G}(\boldsymbol{X}) + \boldsymbol{F}(\boldsymbol{X})d(\boldsymbol{G}(\boldsymbol{X}))
+     \end{equation}
+     其中， $\boldsymbol{F}_{p\times q}(\boldsymbol{X}), \boldsymbol{G}_{q\times s}(\boldsymbol{X})$
+   - 转置法则：转置的矩阵微分等于矩阵微分的转置
+     \begin{equation}
+       d\boldsymbol{F}_{p\times q}^{T}(\boldsymbol{X}) = (d\boldsymbol{F}_{p\times q}(\boldsymbol{X}))^{T}
+     \end{equation}
+** 为什么使用矩阵微分求导
+1. 对于矩阵变元的实值标量函数的全微分
+2. 对于等式 ([[eq:trace_two_matrx]])，在 trace 中，左边的矩阵就是
+   \begin{equation}
+     \begin{aligned}
+       D_{\boldsymbol{X}}f(\boldsymbol{X}) &=  \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^T_{m\times n}}\\
+       {} &= \left[
+       \begin{array}{llll}
+         \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{21}} & \ldots & \frac{\partial f}{\partial x_{m1}}\\
+         \frac{\partial f}{\partial x_{12}} & \frac{\partial f}{\partial x_{22}} & \ldots & \frac{\partial f}{\partial
+         x_{m2}}\\
+         \vdots & \vdots & \vdots & \vdots\\
+         \frac{\partial f}{\partial x_{1n}} & \frac{\partial f}{\partial x_{2n}} & \ldots & \frac{\partial f}{\partial
+         x_{mn}}\\
+       \end{array}
+       \right]_{n\times m}
+     \end{aligned}
+   \end{equation}
+3. 右边的矩阵就是 $d\boldsymbol{X}_{m\time n}$
+4. 因此，矩阵变元的实值标量函数的全微分，可以写为
+   #+NAME: eq:scalar_fun_of_matrix_var
+   \begin{equation}
+     df(\boldsymbol{X}) = tr(\frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^{T}}d\boldsymbol{X})
+   \end{equation}
+5. 只需要将一个矩阵变元的实值标量函数的全微分写成等式 ([[eq:scalar_fun_of_matrix_var]]) 就可以得到 $\frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^T}$
+*** 几个性质
+1. 夹层饼
+   \begin{equation}
+     d(\boldsymbol{A}\boldsymbol{X}\boldsymbol{B}) = \boldsymbol{A}d(\boldsymbol{X})\boldsymbol{B}
+   \end{equation}
+   其中， $\boldsymbol{A}_{p\times m}, \boldsymbol{B}_{n\times q}$ 是常数矩阵
+2. 行列式 $d|\boldsymbol{X}| = |\boldsymbol{X}|tr(\boldsymbol{X}^{-1}d\boldsymbol{X}) = tr(|\boldsymbol{X}|\boldsymbol{X}^{-1}d\boldsymbol{X})$, 其中 $\boldsymbol{X}_{n\times n}$
+   - 行列式是一个实值标量函数，可以应用等式 ([[eq:scalar_fun_of_matrix_var]])
+   - 将 $|\boldsymbol{X}|$ 按照元素 $x_{ij}$ 所在的第 $i$ 行展开
+     \begin{equation}
+       |\boldsymbol{X}| = x_{i1}A_{i1} + x_{i2}A_{i2} + \ldots + x_{in}A_{in}
+     \end{equation}
+   - 对元素 $x_{ij}$ 的偏导，即为该元素对应的代数余子式
+     \begin{equation}
+       \frac{\partial |\boldsymbol{X}}{\partial x_{ij}} = A_{ij}
+     \end{equation}
+   - 行列式对矩阵求导的结果为
+     \begin{equation}
+       \frac{\partial |\boldsymbol{X}|}{\partial \boldsymbol{X}^{T}} = \left[
+         \begin{array}{llll}
+           A_{11} & A_{21} & \ldots & A_{n1}\\
+           A_{12} & A_{22} & \ldots & A_{n2}\\
+           \vdots & \vdots & \vdots & \vdots\\
+           A_{1n} & A_{2n} & \ldots & A_{nn}\\
+         \end{array}
+       \right] = \boldsymbol{X}^\ast
+     \end{equation}
+   - $\boldsymbol{X}^\ast$ 为伴随矩阵，和逆矩阵关系为
+     \begin{equation}
+       \boldsymbol{X}^{-1} = \frac{\boldsymbol{X}^{\ast}}{|\boldsymbol{X}|}
+     \end{equation}
+   - 于是有
+     \begin{equation}
+       \begin{aligned}
+         d|\boldsymbol{X}| &= tr(\frac{\partial |\boldsymbol{X}|}{\partial \boldsymbol{X}^{T}}d\boldsymbol{X})\\
+         {} &= tr(|\boldsymbol{X}|\boldsymbol{X}^{-1}d\boldsymbol{X})
+         {} &= |\boldsymbol{X}|tr(\boldsymbol{X}^{-1}d\boldsymbol{X})
+       \end{aligned}
+     \end{equation}
+3. 逆矩阵 $d(\boldsymbol{X}^{-1}) = -\boldsymbol{X}^{-1}d(\boldsymbol{X})\boldsymbol{X}^{-1}$, 其中 $\boldsymbol{X}_{n\times n}$
+   - $\boldsymbol{X}\boldsymbol{X}^{-1} = \boldsymbol{E}$
+   - 对上式取微分，有
+     \begin{equation}
+       d(\boldsymbol{X})\boldsymbol{X}^{-1} + \boldsymbol{X}d(\boldsymbol{X}^{-1}) = 0
+     \end{equation}
+   - 对上式左乘 $\boldsymbol{X}^{-1}$ 可证
