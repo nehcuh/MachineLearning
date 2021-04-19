@@ -32,7 +32,7 @@
 ** 房价预测的数据
 
 原始数据来自 [[https://www.kaggle.com/c/house-prices-advanced-regression-techniques][Kaggle]], 包括训练集 ~train.csv~ 和测试集 ~test.csv~, 两者的 feature 格式一致，且均包含非数值型特征
-已经空值等。
+以及空值等。
 
 | Id  | FEATURE_1 | FEATURE_2 | ... | HOUSE PRICE |
 |-----+-----------+-----------+-----+-------------|
@@ -44,8 +44,9 @@
  3. 在对应场景目录下，文件夹 ~Python~ 包括实现线性回归的 Python 代码
  4. 根据线性回归的实现方式，分为从零实现线性回归的目录 ~from_scratch~, 使用 =sklearn= 实现线性回归应用的 ~sklearn~ 以及
     使用 =mxnet= 实现线性回归应用的 ~mxnet~
- 5. 线性回归的损失函数进行微分的时候，需要用到矩阵微分相关知识，在对应目录 ~Notes~ 中是对应矩阵的微分的背景知识
- 6. Data 训练和测试数据
+ 5. 线性回归的损失函数进行微分的时候，需要用到矩阵微分相关知识，在对应目录 ~Notes~ 中是对应矩阵的微分的背景知识，内容来自
+    知乎大V [[https://www.zhihu.com/people/iterator-23][Iterator]] 分享的一系列文章
+ 6. ~Data~ 目录保存训练和测试数据
 
 * 数据处理说明
 ** PM2.5 预测
