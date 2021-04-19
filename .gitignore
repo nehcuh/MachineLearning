@@ -5,3 +5,6 @@
 *.ccls
 __pycache__/
 References/
+References/*
+Kaggle/
+Kaggle/*

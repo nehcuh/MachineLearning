@@ -241,7 +241,7 @@ function 是一个实矩阵函数，用粗体大写字母 $F$ 表示
 2. 示例
    \begin{equation}
      \begin{aligned}
-       \nabla_{\boldsymbol{X}} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^T_{m\times n}}\\
+       \nabla_{\boldsymbol{X}} f(\boldsymbol{X}) &= \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}_{m\times n}}\\
        {}&=\left[
          \begin{array}{llll}
            \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{12}} & \ldots & \frac{\partial f}{\partial x_{1n}}\\
@@ -261,11 +261,14 @@ function 是一个实矩阵函数，用粗体大写字母 $F$ 表示
      vec(\boldsymbol{X}) = [x_{11}, x_{21}, \ldots, x_{m1},x_{12},x_{22},\ldots,x_{m2},\ldots,x_{1n},x_{2n},\ldots,x_{mn}]^{T}
    \end{equation}
 2. 将实矩阵函数 $\boldsymbol{F}$ 按 vec 向量化，转换为实向量函数
+   \begin{small}
    \begin{equation}
-     vec(F(\boldsymbol{X})) = [f_{11}(\boldsymbol{X}), f_{21}(\boldsymbol{X}), \ldots, f_{m1}(\boldsymbol{X}),f_{12}(\boldsymbol{X}),f_{22}(\boldsymbol{X}),\ldots,f_{m2}(\boldsymbol{X}),\ldots,f_{1n}(\boldsymbol{X}),f_{2n}(\boldsymbol{X}),\ldots,f_{mn}(\boldsymbol{X})]^{T}
+     vec(F(\boldsymbol{X})) = [f_{11}(\boldsymbol{X}), f_{21}(\boldsymbol{X}), \ldots, f_{m1}(\boldsymbol{X}),f_{12}(\boldsymbol{X}),\ldots,f_{m2}(\boldsymbol{X}),\ldots,f_{1n}(\boldsymbol{X}),f_{2n}(\boldsymbol{X}),\ldots,f_{mn}(\boldsymbol{X})]^{T}
    \end{equation}
+   \end{small}
 3. 写出布局为 $pq\times mn$ 的矩阵
    \begin{equation}
+    \small
      \begin{aligned}
        D_{\boldsymbol{X}} \boldsymbol{F}(\boldsymbol{X}) &= \frac{\partial vec_{pg\times 1}(\boldsymbol{F}(\boldsymbol{X}))}{\partial vec^{T}_{mn\times 1}\boldsymbol{X}} \\
        {} &=
@@ -360,7 +363,7 @@ function 是一个实矩阵函数，用粗体大写字母 $F$ 表示
 \end{equation}
 *** 公式 3
 \begin{equation}
-   \frac{\partial (\boldsymbol{x}^T\boldsymbol{A}\boldsymbol{a})}{\partial \boldsymbol{x}} =  \boldsymbol{A}\boldsymbol{x} + \boldsymbol{A}^T\boldsymbol{x}
+   \frac{\partial (\boldsymbol{x}^T\boldsymbol{A}\boldsymbol{x})}{\partial \boldsymbol{x}} =  \boldsymbol{A}\boldsymbol{x} + \boldsymbol{A}^T\boldsymbol{x}
 \end{equation}
 其中， $\boldsymbol{A}_{n\times n}$ 为常数矩阵
 *** 公式 4
@@ -440,7 +443,7 @@ $n\times n$ 的方阵 $\boldsymbol{A}_{n\times n}$ 的主对角线元素之和�
    \end{equation}
 3. 转置：转置矩阵的迹等于原矩阵的迹
 4. 乘积的迹的本质
-   对于两个阶数都是 $m\times n$ 的矩阵 $\boldsymbol{A}_{m\times n}, \boldsymbol{B}_{m\times n}$, 其中一个矩阵诚意另一个
+   对于两个阶数都是 $m\times n$ 的矩阵 $\boldsymbol{A}_{m\times n}, \boldsymbol{B}_{m\times n}$, 其中一个矩阵乘以另一个
    矩阵的转置的迹，本质上是 $\boldsymbol{A}_{m\times n}, \boldsymbol{B}_{m\times n}$ 两个矩阵对应位置的元素相乘并相加，
    可以理解为向量点积在矩阵上的推广
    #+NAME: eq:trace_prod
@@ -473,7 +476,7 @@ $n\times n$ 的方阵 $\boldsymbol{A}_{n\times n}$ 的主对角线元素之和�
 2. 全微分
    \begin{equation}
      \begin{aligned}
-       df(\boldsymbol{x}) &= \frac{\partial f}{\partial x_{1}}dx_{1} + \frac{\partial f}{\partial x_{2}}dx_{2}+\ldots++\frac{\partial f}{\partial x_{n}}dx_{n}\\
+       df(\boldsymbol{x}) &= \frac{\partial f}{\partial x_{1}}dx_{1} + \frac{\partial f}{\partial x_{2}}dx_{2}+\ldots+\frac{\partial f}{\partial x_{n}}dx_{n}\\
        {} &= \left(\frac{\partial f}{\partial x_{1}},\frac{\partial f}{\partial x_{2}},\ldots,\frac{\partial f}{\partial x_{n}}\right)
        \left[\begin{array}{l}
          dx_{1}\\
@@ -510,10 +513,10 @@ $n\times n$ 的方阵 $\boldsymbol{A}_{n\times n}$ 的主对角线元素之和�
 2. 全微分
    \begin{equation}
      \begin{aligned}
-       df(\boldsymbol{X}) &= \frac{\partial f}{\partial x_{11}}dx_{11} + \frac{\partial f}{\partial x_{12}}dx_{12}+\ldots++\frac{\partial f}{\partial x_{1n}}dx_{1n}\\
-       {} &+ \frac{\partial f}{\partial x_{21}}dx_{21} + \frac{\partial f}{\partial x_{22}}dx_{22}+\ldots++\frac{\partial f}{\partial x_{2n}}dx_{2n}\\
+       df(\boldsymbol{X}) &= \frac{\partial f}{\partial x_{11}}dx_{11} + \frac{\partial f}{\partial x_{12}}dx_{12}+\ldots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\
+       {} &+ \frac{\partial f}{\partial x_{21}}dx_{21} + \frac{\partial f}{\partial x_{22}}dx_{22}+\ldots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\
        {} &+ \ldots\\
-       {} &+ \frac{\partial f}{\partial x_{m1}}dx_{m1} + \frac{\partial f}{\partial x_{m2}}dx_{m2}+\ldots++\frac{\partial f}{\partial x_{mn}}dx_{mn}
+       {} &+ \frac{\partial f}{\partial x_{m1}}dx_{m1} + \frac{\partial f}{\partial x_{m2}}dx_{m2}+\ldots+\frac{\partial f}{\partial x_{mn}}dx_{mn}
      \end{aligned}
    \end{equation}
 3. 上式其实就是矩阵 $\left(\frac{\partial f}{\partial x_{ij}\right)_{i=1,j=1}^{m,n}$  与矩阵 $(dx_{ij})_{i=1,j=1}^{m,n}$
@@ -522,9 +525,9 @@ $n\times n$ 的方阵 $\boldsymbol{A}_{n\times n}$ 的主对角线元素之和�
    \begin{equation}
      \begin{aligned}
        df(\boldsymbol{X}) &= \frac{\partial f}{\partial x_{11}}dx_{11} + \frac{\partial f}{\partial x_{12}}dx_{12}+\ldots++\frac{\partial f}{\partial x_{1n}}dx_{1n}\\
-       {} &+ \frac{\partial f}{\partial x_{21}}dx_{21} + \frac{\partial f}{\partial x_{22}}dx_{22}+\ldots++\frac{\partial f}{\partial x_{2n}}dx_{2n}\\
+       {} &+ \frac{\partial f}{\partial x_{21}}dx_{21} + \frac{\partial f}{\partial x_{22}}dx_{22}+\ldots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\
        {} &+ \ldots\\
-       {} &+ \frac{\partial f}{\partial x_{m1}}dx_{m1} + \frac{\partial f}{\partial x_{m2}}dx_{m2}+\ldots++\frac{\partial f}{\partial x_{mn}}dx_{mn}\\
+       {} &+ \frac{\partial f}{\partial x_{m1}}dx_{m1} + \frac{\partial f}{\partial x_{m2}}dx_{m2}+\ldots+\frac{\partial f}{\partial x_{mn}}dx_{mn}\\
        {} &= tr(\left[
         \begin{array}{llll}
           \frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{21}} & \ldots & \frac{\partial f}{\partial x_{m1}} \\
@@ -578,7 +581,7 @@ $n\times n$ 的方阵 $\boldsymbol{A}_{n\times n}$ 的主对角线元素之和�
      \end{equation}
 ** 为什么使用矩阵微分求导
 1. 对于矩阵变元的实值标量函数的全微分
-2. 对于等式 ([[eq:trace_two_matrx]])，在 trace 中，左边的矩阵就是
+2. 对于等式 ([[eq:trace_two_matrix]])，在 trace 中，左边的矩阵就是
    \begin{equation}
      \begin{aligned}
        D_{\boldsymbol{X}}f(\boldsymbol{X}) &=  \frac{\partial f(\boldsymbol{X})}{\partial \boldsymbol{X}^T_{m\times n}}\\
