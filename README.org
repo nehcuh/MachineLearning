@@ -1,0 +1,16 @@
+#+TITLE: Readme
+
+* 介绍
+
+在该 Repo 中，笔者试图覆盖常见的机器学习算法，并以实际场景的应用作为入口，试图对 Machine Learning 的
+各个方面进行比较深入的理解和实践。
+
+在实际应用场景中，笔者会根据使用的不同模型进行文件夹的划分，譬如，线性回归则对应目录为 `LinearRegression`,
+同时，考虑到实现的方式以及实现的语言，笔者按照 `编程语言/使用 pacakge` 进行子目录的划分。
+
+譬如，在现有 `Repo` 中包含了一个 PM2.5 预测的项目，其对应的目录为 `LinearRegression/PM2.5Prediction`,
+笔者针对该场景，分别实现了 C++ 版本的线性模型和 Python 版本的线性模型，对应到具体目录，就是
+[[file:LinearRegression/PM2.5Prediction/C++/][线性模型 C++ 版本]] 和 [[file:LinearRegression/PM2.5Prediction/Python/][线性模型 Python 版本]]. 在对应的 `Python` 目录下，笔者又根据使用的 package,
+对实现方案分别进行划分，譬如，从零开始的 `from_scatch`, 利用 ~sklearn~ 实现的线性模型 ~sklearn~ 等。
+
+在目录 ~Notes~ 中一般包含该项目需要的一些背景知识。在 ~Data~ 目录一般包含该项目需要用到的数据。
