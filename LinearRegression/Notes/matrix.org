@@ -20,6 +20,7 @@ function 是一个实值标量函数，用细体小写字母 $f$ 表示
 *** input 为向量
 1. 称 function 的变元为向量，用粗体小写字母 $\boldsymbol{x}$ 表示
 2. 示例：设 $\boldsymbol{x} = [x_1, x_2, x_3]^T$
+
    \begin{equation}
      f(\boldsymbol{x}) = a_{1}x_{1}^{2} + a_{2}x_{2}^{2} + a_{3}x_{3}^{2} + a_{4}x_{1}x_{2}
    \end{equation}
@@ -27,6 +28,7 @@ function 是一个实值标量函数，用细体小写字母 $f$ 表示
 *** input 为矩阵
 1. 称 function 的变元为矩阵，用粗体的大写字母 $\boldsymbol{X}$ 表示
 2. 示例：设 $\boldsymbol{X}_{3\times 2} = (x_{ij})_{i=1,j=1}^{3,2}$
+
    \begin{equation}
      f(\boldsymbol{X}) = a_{1}x_{11}^{2} + a_{2}x_{12}^{2} + a_{3}x_{21}^{2} + a_{4}x_{22}^{2} + a_{5}x_{31}^{2} + a_{6}x_{32}^{2}
    \end{equation}
@@ -38,7 +40,7 @@ function 是一个实向量函数，用粗体小写字母 $f$ 表示
 #+end_quote
 
 *** 标量变元
-
+#+begin_src latex
 \begin{equation}
   \boldsymbol{f}_{3\times 1}(x) = \left[\begin{array}{l}
                                        f_{1}(x)\\
@@ -50,6 +52,19 @@ function 是一个实向量函数，用粗体小写字母 $f$ 表示
                                                                   3x^{2}+1
                                                                 \end{array}\right]
 \end{equation}
+#+end_src
+\begin{equation}
+  \boldsymbol{f}_{3\times 1}(x) = \left[\begin{array}{l}
+                                       f_{1}(x)\\
+                                       f_{2}(x)\\
+                                       f_{3}(x)
+                                     \end{array}\right] = \left[\begin{array}{l}
+                                                                  x+1\\
+                                                                  2x+1\\
+                                                                  3x^{2}+1
+                                                                \end{array}\right]
+\end{equation}
+
 *** 向量变元
 1. 令 $\boldsymbol{x} = [x_1,x_2,x_3]^T$
 2. 示例
