@@ -41,7 +41,7 @@ function 是一个实向量函数，用粗体小写字母 $f$ 表示
 
 *** 标量变元
 
-$$
+\begin{equation}
   \boldsymbol{f}_{3\times 1}(x) = \left[\begin{array}{l}
                                        f_{1}(x)\\
                                        f_{2}(x)\\
@@ -51,7 +51,7 @@ $$
                                                                   2x+1\\
                                                                   3x^{2}+1
                                                                 \end{array}\right]
-$$
+\end{equation}
 
 *** 向量变元
 1. 令 $\boldsymbol{x} = [x_1,x_2,x_3]^T$
